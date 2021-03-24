@@ -100,7 +100,6 @@ public class FlightNode {
 
 	/**
 	 * Returns the string representing the FlightNode in FlightList.toString().
-	 * @return
 	 */
 	public String toStringInSkipList() {
 		return "(" + this.fKey.getOrigin() + ", " + this.fKey.getDest() + ", " + this.fKey.getDate().substring(0, 5)
@@ -109,7 +108,6 @@ public class FlightNode {
 
 	/**
 	 * Returns the string representing the FlightNode.
-	 * @return
 	 */
 	public String toString() {
 		return "(" + this.fKey.getOrigin() + ", " + this.fKey.getDest() + ", " + this.fKey.getDate()
