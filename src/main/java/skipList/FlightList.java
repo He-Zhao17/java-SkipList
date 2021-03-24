@@ -66,6 +66,22 @@ public class FlightList {
 	 */
 	public boolean find(FlightKey key) {
 		// FILL IN CODE
+		// Binary Search?
+		FlightNode curr = this.head;
+		for (int i = 0; i < this.height - 1; i++) {
+			curr = curr.up;
+		}
+		int currLevel = this.height;
+		while (currLevel > 0) {
+			while (curr.next.getKey() != null && curr.next.getKey().compareTo(key) <= 0) {
+				if (curr.next.getKey().compareTo(key) == 0) {
+					return true;
+				}
+				curr = curr.next;
+			}
+			curr = curr.down;
+			currLevel--;
+		}
 		return false; // don't forget to change it
 	}
 
