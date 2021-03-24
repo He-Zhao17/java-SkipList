@@ -63,12 +63,12 @@ public class FlightKey implements Comparable<FlightKey> {
 			} else {
 				StringBuilder thisDate = new StringBuilder(this.date.substring(6));
 				thisDate.append(this.date.substring(0,2));
-				thisDate.append(this.date.substring(3,2));
-				long thisDateNum = Long.getLong(thisDate.toString());
+				thisDate.append(this.date.substring(3,5));
+				long thisDateNum = Long.valueOf(thisDate.toString());
 				StringBuilder otherDate = new StringBuilder(other.date.substring(6));
 				otherDate.append(other.date.substring(0,2));
-				otherDate.append(other.date.substring(3,2));
-				long otherDateNum = Long.getLong(otherDate.toString());
+				otherDate.append(other.date.substring(3,5));
+				long otherDateNum = Long.valueOf(otherDate.toString());
 				if(thisDateNum > otherDateNum) {
 					return 1;
 				} else if (thisDateNum < otherDateNum) {
@@ -76,10 +76,10 @@ public class FlightKey implements Comparable<FlightKey> {
 				} else {
 					String thisTimeStr = this.time;
 					String otherTimeStr = other.time;
-					thisTimeStr.replace(":", "");
-					otherTimeStr.replace(":", "");
-					int thisTime = Integer.getInteger(thisTimeStr);
-					int otherTime = Integer.getInteger(otherTimeStr);
+					thisTimeStr = thisTimeStr.substring(0,2) + thisTimeStr.substring(3);
+					otherTimeStr = otherTimeStr.substring(0,2) + otherTimeStr.substring(3);
+					int thisTime = Integer.valueOf(thisTimeStr);
+					int otherTime = Integer.valueOf(otherTimeStr);
 					if (thisTime > otherTime) {
 						return 1;
 					} else if (thisTime < otherTime) {

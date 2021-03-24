@@ -27,10 +27,10 @@ public class FlightNode {
 //		this.down = node.down;
 //		this.prev = node.prev;
 //		this.up	= node.up;
-		this.up = null;
-		this.down = null;
-		this.prev = null;
-		this.next = null;
+//		this.up = null;
+//		this.down = null;
+//		this.prev = null;
+//		this.next = null;
 	}
 
 	/**
@@ -42,10 +42,10 @@ public class FlightNode {
 		// FILL IN CODE
 		this.fKey = key;
 		this.fData = data;
-		this.up = null;
-		this.down = null;
-		this.prev = null;
-		this.next = null;
+//		this.up = null;
+//		this.down = null;
+//		this.prev = null;
+//		this.next = null;
 	}
 
 	// FILL IN CODE: write getters and setters for all private variables
@@ -106,13 +106,13 @@ public class FlightNode {
 				+ ", " + this.fKey.getTime() + ")";
 	}
 
-	/**
-	 * Returns the string representing the FlightNode.
-	 */
-	public String toString() {
-		return "(" + this.fKey.getOrigin() + ", " + this.fKey.getDest() + ", " + this.fKey.getDate()
-				+ ", " + this.fKey.getTime() + this.getData().getFlightNumber() + ", " + this.getData().getPrice() + ")";
-	}
+//	/**
+//	 * Returns the string representing the FlightNode.
+//	 */
+//	public String toStringInSkipList() {
+//		return "(" + this.fKey.getOrigin() + ", " + this.fKey.getDest() + ", " + this.fKey.getDate()
+//				+ ", " + this.fKey.getTime() + this.getData().getFlightNumber() + ", " + this.getData().getPrice() + ")";
+//	}
 
 	public boolean equals(FlightNode other) {
 		if (this.getData().equals(other.getData()) && this.getKey().equals(other.getKey())) {
