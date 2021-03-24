@@ -98,7 +98,9 @@ public class FlightList {
 
 
 		// call find()
-		// past;
+		if (find(key)) {
+			return false;
+		}
 
 
 		try {
