@@ -10,10 +10,10 @@ public class FlightNode {
 	// FILL IN CODE, declare instance variables (make them private)
 	private FlightKey fKey;
 	private FlightData fData;
-	private FlightNode next;
-	private FlightNode prev;
-	private FlightNode down;
-	private FlightNode up;
+	public FlightNode next;
+	public FlightNode prev;
+	public FlightNode down;
+	public FlightNode up;
 
 	/**
      * Copy constructor for FlightNode
@@ -23,10 +23,10 @@ public class FlightNode {
 		// FILL IN CODE
 		this.fKey = node.fKey;
 		this.fData = node.fData;
-		/*this.next = node.next;
-		this.down = node.down;
-		this.prev = node.prev;
-		this.up	= node.up;*/
+//		this.next = node.next;
+//		this.down = node.down;
+//		this.prev = node.prev;
+//		this.up	= node.up;
 		this.up = null;
 		this.down = null;
 		this.prev = null;
@@ -66,37 +66,37 @@ public class FlightNode {
 		return this.fData;
 	}
 
-	/**
-	 * A getter for the pointer of the next node
-	 * @retrun next
-	 */
-	public FlightNode getNext() {
-		return this.next;
-	}
-
-	/**
-	 * A getter for the pointer of the previous node
-	 * @retrun prev
-	 */
-	public FlightNode getPrev() {
-		return this.prev;
-	}
-
-	/**
-	 * A getter for the pointer of the up node
-	 * @retrun up
-	 */
-	public FlightNode getUp() {
-		return this.up;
-	}
-
-	/**
-	 * A getter for the pointer of the down node
-	 * @retrun down
-	 */
-	public FlightNode getDown() {
-		return this.down;
-	}
+//	/**
+//	 * A getter for the pointer of the next node
+//	 * @retrun next
+//	 */
+//	public FlightNode getNext() {
+//		return this.next;
+//	}
+//
+//	/**
+//	 * A getter for the pointer of the previous node
+//	 * @retrun prev
+//	 */
+//	public FlightNode getPrev() {
+//		return this.prev;
+//	}
+//
+//	/**
+//	 * A getter for the pointer of the up node
+//	 * @retrun up
+//	 */
+//	public FlightNode getUp() {
+//		return this.up;
+//	}
+//
+//	/**
+//	 * A getter for the pointer of the down node
+//	 * @retrun down
+//	 */
+//	public FlightNode getDown() {
+//		return this.down;
+//	}
 
 
 }

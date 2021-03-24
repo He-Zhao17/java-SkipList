@@ -8,11 +8,18 @@ public class FlightList {
 
 	// FILL IN CODE: needs to store the head, the tail and the height of the skip
 	// list
+	private FlightNode head;
+	private FlightNode tail;
+	private int height;
 
 	/** Default constructor */
 	public FlightList() {
 		// FILL IN CODE
-
+		head = new FlightNode(null, null);
+		tail = new FlightNode(null, null);
+		head.next = tail;
+		tail.prev = head;
+		height = 1;
 	}
 
 	/**
