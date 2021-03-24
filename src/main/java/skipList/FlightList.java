@@ -1,7 +1,10 @@
 package skipList;
 
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 /** The class that represents the flight database using a skip list */
 public class FlightList {
@@ -29,6 +32,35 @@ public class FlightList {
 	 */
 	public FlightList(String filename) {
 		// FILL IN CODE
+		head = new FlightNode(null, null);
+		tail = new FlightNode(null, null);
+		head.next = tail;
+		tail.prev = head;
+		height = 1;
+
+		String line;
+		File file;
+		Scanner scan;
+		try {
+			file = new File(filename);
+			scan = new Scanner(file);
+			while (scan.hasNext()) {
+				line = scan.nextLine();
+				String[] strList = line.split(" ");
+				FlightKey tempKey = new FlightKey(strList[0], strList[1], strList[2], strList[3]);
+				double tempPrice = Double.valueOf(strList[5]);
+				FlightData tempData = new FlightData(strList[4], tempPrice);
+				FlightNode tempNode = new FlightNode(tempKey,tempData);
+
+
+			}
+
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	/**
@@ -53,7 +85,85 @@ public class FlightList {
 	 */
 	public boolean insert(FlightKey key, FlightData data) {
 		// FILL IN CODE
-		return false; // don't forget to change it
+
+
+		// call find()
+		// past;
+
+
+		try {
+			int coin = -1;
+			int level = 1;
+			Random rand = new Random();
+			while (coin < 0) {
+				coin = rand.nextInt(10) - 5;
+				level++;
+			}
+			FlightNode curr = this.head;
+			if (level <= this.height) {
+				for (int i = 0; i < level - 1; i++) {
+					curr = curr.up;
+				}
+				FlightNode temp = new FlightNode(key, data);
+				FlightNode temp1 = temp;
+				for (int i = 0; i < level; i++) {
+					temp1.down = new FlightNode(temp);
+					temp1.down.up = temp;
+					temp1 = temp.down;
+				}
+				for (int j = 0; j < level; j++) {
+					while (curr.next.getKey() != null && curr.next.getKey().compareTo(key) < 0) {
+						curr = curr.next;
+					}
+
+					temp.next = curr.next;
+					curr.next.prev = temp;
+					curr.next = temp;
+					temp.prev = curr;
+					temp = temp.down;
+					curr = curr.down;
+				}
+			} else {
+				FlightNode currTail = this.tail;
+				for (int i = 0; i < this.height - 1; i++) {
+					curr = curr.up;
+					currTail = this.tail;
+				}
+				for (int i = 0; i < level - this.height; i++) {
+					curr.up = new FlightNode(curr);
+					curr.up.down = curr;
+					currTail.up = new FlightNode(currTail);
+					currTail.up.down = currTail;
+					curr = curr.up;
+					currTail = currTail.up;
+					curr.next = currTail;
+					currTail.prev = curr;
+				}
+				FlightNode temp = new FlightNode(key, data);
+				FlightNode temp1 = temp;
+				for (int i = 0; i < level; i++) {
+					temp1.down = new FlightNode(temp);
+					temp1.down.up = temp;
+					temp1 = temp.down;
+				}
+				for (int j = 0; j < level; j++) {
+					while (curr.next.getKey() != null && curr.next.getKey().compareTo(key) < 0) {
+						curr = curr.next;
+					}
+
+					temp.next = curr.next;
+					curr.next.prev = temp;
+					curr.next = temp;
+					temp.prev = curr;
+					temp = temp.down;
+					curr = curr.down;
+				}
+			}
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+		//return false; // don't forget to change it
 	}
 
 	/**
