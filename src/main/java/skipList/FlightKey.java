@@ -21,6 +21,10 @@ public class FlightKey implements Comparable<FlightKey> {
 	 */
     public FlightKey(String or, String dest, String date, String time) {
 		// FILL IN CODE
+		this.origin = or;
+		this.dest = dest;
+		this.date = date;
+		this.time = time;
 
 	}
 
@@ -30,10 +34,15 @@ public class FlightKey implements Comparable<FlightKey> {
 	 */
 	public FlightKey(FlightKey other) {
 		// FILL IN CODE
+		this.origin = other.origin;
+		this.date = other.date;
+		this.dest = other.dest;
+		this.time = other.time;
 
 	}
 
 	// FILL IN CODE: Write getters for origin, destination, date and time
+
 
 	/**
      * Compares a given flight key with the one given as a parameter.
@@ -42,7 +51,46 @@ public class FlightKey implements Comparable<FlightKey> {
 	 */
 	public int compareTo(FlightKey other) {
 		// FILL IN CODE
-		return 0; // don't forget to change it
+		if (this.origin.compareTo(other.origin) > 0) {
+			return 1;
+		} else if (this.origin.compareTo(other.origin) < 0){
+			return -1;
+		} else {
+			if (this.dest.compareTo(other.dest) > 0) {
+				return 1;
+			} else if(this.dest.compareTo(other.dest) < 0) {
+				return -1;
+			} else {
+				StringBuilder thisDate = new StringBuilder(this.date.substring(6));
+				thisDate.append(this.date.substring(0,2));
+				thisDate.append(this.date.substring(3,2));
+				long thisDateNum = Long.getLong(thisDate.toString());
+				StringBuilder otherDate = new StringBuilder(other.date.substring(6));
+				otherDate.append(other.date.substring(0,2));
+				otherDate.append(other.date.substring(3,2));
+				long otherDateNum = Long.getLong(otherDate.toString());
+				if(thisDateNum > otherDateNum) {
+					return 1;
+				} else if (thisDateNum < otherDateNum) {
+					return -1;
+				} else {
+					String thisTimeStr = this.time;
+					String otherTimeStr = other.time;
+					thisTimeStr.replace(":", "");
+					otherTimeStr.replace(":", "");
+					int thisTime = Integer.getInteger(thisTimeStr);
+					int otherTime = Integer.getInteger(otherTimeStr);
+					if (thisTime > otherTime) {
+						return 1;
+					} else if (thisTime < otherTime) {
+						return -1;
+					} else {
+						return 0;
+					}
+				}
+			}
+		}
+		//return 0; // don't forget to change it
 	}
 
 	/**
@@ -51,7 +99,7 @@ public class FlightKey implements Comparable<FlightKey> {
 	 */
 	public String toString() {
 		// FILL IN CODE
-		return ""; // don't forget to change it
+		return this.origin + " " + this.dest + " " + this.date + " " + this.time; // don't forget to change it
 	}
 
 	/**
