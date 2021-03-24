@@ -67,6 +67,9 @@ public class FlightList {
 	public boolean find(FlightKey key) {
 		// FILL IN CODE
 		// Binary Search?
+		if (this.head.next.getKey().compareTo(key) > 0 || this.tail.prev.getKey().compareTo(key) < 0) {
+			return false;
+		}
 		FlightNode curr = this.head;
 		for (int i = 0; i < this.height - 1; i++) {
 			curr = curr.up;
@@ -189,7 +192,56 @@ public class FlightList {
 	public List<FlightNode> successors(FlightKey key) {
 		List<FlightNode> arr = new ArrayList<FlightNode>();
 		// FILL IN CODE
+		if (this.tail.prev.getKey().compareTo(key) < 0) {
+			return arr;
+		}
+		if (this.head.next.getKey().compareTo(key) <= 0) {
+			FlightNode curr = this.head.next;
+			while (curr.getKey() != null) {
+				arr.add(curr);
+				curr = curr.next;
+			}
+			return arr;
+		}
+		if (this.tail.prev.getKey().compareTo(key) == 0) {
+			arr.add(this.tail.prev);
+			return arr;
+		}
+		FlightNode curr = this.head;
+		for (int i = 0; i < this.height - 1; i++) {
+			curr = curr.up;
+		}
+		int currLevel = this.height;
+		FlightNode res = null;
+		outer:
+		while (currLevel > 0) {
+			while (curr.next.getKey() != null && curr.next.getKey().compareTo(key) <= 0) {
+				if (curr.next.getKey().compareTo(key) == 0) {
+					res = curr.next;
+					break outer;
+				}
+				curr = curr.next;
+			}
+			curr = curr.down;
+			currLevel--;
+		}
 
+		if (res != null) {
+
+			for (int i = 0; i < currLevel - 1; i++) {
+				res = res.down;
+			}
+			while (res.getKey() != null) {
+				arr.add(res);
+				res = res.next;
+			}
+			return arr;
+		}
+		curr = curr.next;
+		while (curr.getKey() != null) {
+			arr.add(curr);
+			curr = curr.next;
+		}
 		return arr;
 	}
 
