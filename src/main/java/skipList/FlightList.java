@@ -50,17 +50,11 @@ public class FlightList {
 				FlightKey tempKey = new FlightKey(strList[0], strList[1], strList[2], strList[3]);
 				double tempPrice = Double.valueOf(strList[5]);
 				FlightData tempData = new FlightData(strList[4], tempPrice);
-				FlightNode tempNode = new FlightNode(tempKey,tempData);
-
-
+				insert(tempKey, tempData);
 			}
-
-
-
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**
@@ -158,6 +152,7 @@ public class FlightList {
 					temp = temp.down;
 					curr = curr.down;
 				}
+				this.height = level;
 			}
 			return true;
 		} catch (Exception e) {
