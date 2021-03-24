@@ -98,5 +98,22 @@ public class FlightNode {
 //		return this.down;
 //	}
 
+	/**
+	 * Returns the string representing the FlightNode in FlightList.toString().
+	 * @return
+	 */
+	public String toStringInSkipList() {
+		return "(" + this.fKey.getOrigin() + ", " + this.fKey.getDest() + ", " + this.fKey.getDate().substring(0, 5)
+				+ ", " + this.fKey.getTime() + ")";
+	}
+
+	/**
+	 * Returns the string representing the FlightNode.
+	 * @return
+	 */
+	public String toString() {
+		return "(" + this.fKey.getOrigin() + ", " + this.fKey.getDest() + ", " + this.fKey.getDate()
+				+ ", " + this.fKey.getTime() + this.getData().getFlightNumber() + ", " + this.getData().getPrice() + ")";
+	}
 
 }

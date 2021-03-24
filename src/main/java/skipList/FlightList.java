@@ -312,8 +312,26 @@ public class FlightList {
 	 */
 	public String toString() {
 		// FILL IN CODE
-
-		return ""; // don't forget to change it
+		StringBuilder resSb = new StringBuilder();
+		FlightNode currHead = this.head;
+		FlightNode currTail = this.tail;
+		for (int i = 0; i < this.height - 1; i++) {
+			currHead = currHead.up;
+			currTail = currTail.up;
+		}
+		FlightNode curr;
+		for (int i = 0; i < this.height - 1; i++) {
+			curr = currHead.next;
+			while (curr.getKey() != null) {
+				resSb.append(curr.toStringInSkipList());
+				resSb.append(", ");
+			}
+			resSb.deleteCharAt(resSb.length() - 1);
+			resSb.deleteCharAt(resSb.length() - 1);
+			resSb.append("\n");
+			currHead = currHead.down;
+		}
+		return resSb.toString(); // don't forget to change it
 	}
 
 	/**
