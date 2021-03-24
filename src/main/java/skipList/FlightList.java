@@ -1,10 +1,7 @@
 package skipList;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /** The class that represents the flight database using a skip list */
 public class FlightList {
@@ -252,8 +249,58 @@ public class FlightList {
 		List<FlightNode> arr = new ArrayList<FlightNode>();
 
 		// FILL IN CODE
-		return arr;
+		if (this.head.next.getKey().compareTo(key) >= 0) {
+			return arr;
+		}
 
+		FlightNode curr = this.tail;
+		for (int i = 0; i < this.height - 1; i++) {
+			curr = curr.up;
+		}
+		int currLevel = this.height;
+		FlightNode res = null;
+		outer:
+		while (currLevel > 0) {
+			while (curr.prev.getKey() != null
+					&& curr.prev.getKey().compareTo(key) >= 0
+					&& curr.prev.getKey().getOrigin().equals(key.getOrigin())
+					&& curr.prev.getKey().getDest().equals(key.getDest())
+					&& curr.prev.getKey().getDate().equals(key.getDate())) {
+				if (curr.next.getKey().compareTo(key) == 0) {
+					res = curr.prev;
+					break outer;
+				}
+				curr = curr.prev;
+			}
+			curr = curr.down;
+			currLevel--;
+		}
+		Stack<FlightNode> stack = new Stack<FlightNode>();
+
+		if (res != null) {
+
+			for (int i = 0; i < currLevel - 1; i++) {
+				res = res.down;
+			}
+			res = res.prev;
+			while (res.getKey() != null && res.getKey().getDate().equals(key.getDate())) {
+				stack.push(res);
+				res = res.prev;
+			}
+			for (int i = 0; i < stack.size(); i++) {
+				arr.add(stack.pop());
+			}
+			return arr;
+		}
+		curr = curr.prev;
+		while (curr.getKey() != null && res.getKey().getDate().equals(key.getDate())) {
+			stack.push(curr);
+			curr = curr.prev;
+		}
+		for (int i = 0; i < stack.size(); i++) {
+			arr.add(stack.pop());
+		}
+		return arr;
 	}
 
 	/**
