@@ -38,4 +38,13 @@ public class FlightData {
 		// FILL IN CODE
 		return this.price; // don't forget to change it
 	}
+
+	public boolean equals (FlightData other) {
+		if (this.getFlightNumber().equals(other.getFlightNumber())
+				&& this.getPrice() == other.getPrice()) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

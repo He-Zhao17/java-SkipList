@@ -133,4 +133,15 @@ public class FlightKey implements Comparable<FlightKey> {
 	public String getTime() {
 		return time;
 	}
+
+	public boolean equals(FlightKey other) {
+		if (this.getOrigin().equals(other.getOrigin())
+				&& this.getDest().equals(other.getDest())
+				&& this.getDate().equals(other.getDate())
+				&& this.getTime().equals(other.getTime())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }

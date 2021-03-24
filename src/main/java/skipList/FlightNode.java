@@ -116,4 +116,12 @@ public class FlightNode {
 				+ ", " + this.fKey.getTime() + this.getData().getFlightNumber() + ", " + this.getData().getPrice() + ")";
 	}
 
+	public boolean equals(FlightNode other) {
+		if (this.getData().equals(other.getData()) && this.getKey().equals(other.getKey())) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }

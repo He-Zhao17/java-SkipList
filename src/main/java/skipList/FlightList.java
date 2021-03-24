@@ -357,7 +357,94 @@ public class FlightList {
 	public List<FlightNode> findFlights(FlightKey key, int timeFrame) {
 		List<FlightNode> resFlights = new ArrayList<FlightNode>();
 		// FILL IN CODE
+		String keyTime = key.getTime();
+		int upInt = Integer.valueOf(keyTime.substring(0, 2)) + 2;
+		int downInt = upInt - 4;
+		String up = String.valueOf(upInt) + keyTime.substring(2);
+		String down = String.valueOf(downInt) + keyTime.substring(2);
+		FlightKey upKey = new FlightKey(key.getOrigin(), key.getDest(), key.getDate(), up);
+		FlightKey downKey = new FlightKey(key.getOrigin(), key.getDest(), key.getDate(), down);
 
+		FlightNode end;
+		if (this.tail.prev.getKey().compareTo(upKey) <= 0) {
+			end = this.tail.prev;
+		}
+		FlightNode curr = this.head;
+		for (int i = 0; i < this.height - 1; i++) {
+			curr = curr.up;
+		}
+		int currLevel = this.height;
+		FlightNode res = null;
+		outer:
+		while (currLevel > 0) {
+			while (curr.next.getKey() != null
+					&& curr.next.getKey().compareTo(upKey) <= 0
+					&& curr.next.getKey().getOrigin().equals(upKey.getOrigin())
+					&& curr.next.getKey().getDest().equals(upKey.getDest())
+					&& curr.next.getKey().getDate().equals(upKey.getDate())) {
+				if (curr.next.getKey().compareTo(upKey) == 0) {
+					res = curr.next;
+					break outer;
+				}
+				curr = curr.next;
+			}
+			curr = curr.down;
+			currLevel--;
+		}
+
+		if (res != null) {
+
+			for (int i = 0; i < currLevel - 1; i++) {
+				res = res.down;
+			}
+			end = res;
+		} else {
+			end = curr;
+		}
+
+		FlightNode start;
+		if (this.head.next.getKey().compareTo(downKey) >= 0) {
+			start = this.head.next;
+		}
+
+		curr = this.tail;
+		for (int i = 0; i < this.height - 1; i++) {
+			curr = curr.up;
+		}
+		currLevel = this.height;
+		res = null;
+		outer:
+		while (currLevel > 0) {
+			while (curr.prev.getKey() != null
+					&& curr.prev.getKey().compareTo(downKey) >= 0
+					&& curr.prev.getKey().getOrigin().equals(downKey.getOrigin())
+					&& curr.prev.getKey().getDest().equals(downKey.getDest())
+					&& curr.prev.getKey().getDate().equals(downKey.getDate())) {
+				if (curr.next.getKey().compareTo(downKey) == 0) {
+					res = curr.prev;
+					break outer;
+				}
+				curr = curr.prev;
+			}
+			curr = curr.down;
+			currLevel--;
+		}
+		if (res != null) {
+
+			for (int i = 0; i < currLevel - 1; i++) {
+				res = res.down;
+			}
+			start = res;
+
+		} else {
+			start = curr;
+		}
+
+		curr = start;
+		while (!curr.next.equals(end)) {
+			resFlights.add(curr);
+		}
+		resFlights.add(end);
 		return resFlights;
 	}
 
