@@ -192,21 +192,11 @@ public class FlightList {
 	public List<FlightNode> successors(FlightKey key) {
 		List<FlightNode> arr = new ArrayList<FlightNode>();
 		// FILL IN CODE
-		if (this.tail.prev.getKey().compareTo(key) < 0) {
+		if (this.tail.prev.getKey().compareTo(key) <= 0) {
 			return arr;
 		}
-		if (this.head.next.getKey().compareTo(key) <= 0) {
-			FlightNode curr = this.head.next;
-			while (curr.getKey() != null) {
-				arr.add(curr);
-				curr = curr.next;
-			}
-			return arr;
-		}
-		if (this.tail.prev.getKey().compareTo(key) == 0) {
-			arr.add(this.tail.prev);
-			return arr;
-		}
+
+
 		FlightNode curr = this.head;
 		for (int i = 0; i < this.height - 1; i++) {
 			curr = curr.up;
@@ -215,7 +205,11 @@ public class FlightList {
 		FlightNode res = null;
 		outer:
 		while (currLevel > 0) {
-			while (curr.next.getKey() != null && curr.next.getKey().compareTo(key) <= 0) {
+			while (curr.next.getKey() != null
+					&& curr.next.getKey().compareTo(key) <= 0
+					&& curr.next.getKey().getOrigin().equals(key.getOrigin())
+					&& curr.next.getKey().getDest().equals(key.getDest())
+					&& curr.next.getKey().getDate().equals(key.getDate())) {
 				if (curr.next.getKey().compareTo(key) == 0) {
 					res = curr.next;
 					break outer;
@@ -231,14 +225,15 @@ public class FlightList {
 			for (int i = 0; i < currLevel - 1; i++) {
 				res = res.down;
 			}
-			while (res.getKey() != null) {
+			res = res.next;
+			while (res.getKey() != null && res.getKey().getDate().equals(key.getDate())) {
 				arr.add(res);
 				res = res.next;
 			}
 			return arr;
 		}
 		curr = curr.next;
-		while (curr.getKey() != null) {
+		while (curr.getKey() != null && res.getKey().getDate().equals(key.getDate())) {
 			arr.add(curr);
 			curr = curr.next;
 		}
