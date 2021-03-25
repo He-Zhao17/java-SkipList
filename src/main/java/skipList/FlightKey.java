@@ -64,25 +64,25 @@ public class FlightKey implements Comparable<FlightKey> {
 				StringBuilder thisDate = new StringBuilder(this.date.substring(6));
 				thisDate.append(this.date.substring(0,2));
 				thisDate.append(this.date.substring(3,5));
-				long thisDateNum = Long.valueOf(thisDate.toString());
+				String thisDateNum = thisDate.toString();
 				StringBuilder otherDate = new StringBuilder(other.date.substring(6));
 				otherDate.append(other.date.substring(0,2));
 				otherDate.append(other.date.substring(3,5));
-				long otherDateNum = Long.valueOf(otherDate.toString());
-				if(thisDateNum > otherDateNum) {
+				String otherDateNum = otherDate.toString();
+				if(thisDateNum.compareTo(otherDateNum) > 0) {
 					return 1;
-				} else if (thisDateNum < otherDateNum) {
+				} else if (thisDateNum.compareTo(otherDateNum) < 0) {
 					return -1;
 				} else {
 					StringBuilder thisTimeStrB = new StringBuilder(this.time.substring(0,2));
 					thisTimeStrB.append(this.time.substring(3));
 					StringBuilder otherTimeStrB = new StringBuilder(other.time.substring(0,2));
 					otherTimeStrB.append(other.time.substring(3));
-					int thisTime = Integer.valueOf(thisTimeStrB.toString());
-					int otherTime = Integer.valueOf(otherTimeStrB.toString());
-					if (thisTime > otherTime) {
+					String thisTimeStr = thisTimeStrB.toString();
+					String otherTimeStr = otherTimeStrB.toString();
+					if (thisTimeStr.compareTo(otherTimeStr) > 0) {
 						return 1;
-					} else if (thisTime < otherTime) {
+					} else if (thisTimeStr.compareTo(otherTimeStr) < 0) {
 						return -1;
 					} else {
 						return 0;
