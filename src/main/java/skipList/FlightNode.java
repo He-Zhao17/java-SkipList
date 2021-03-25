@@ -102,17 +102,41 @@ public class FlightNode {
 	 * Returns the string representing the FlightNode in FlightList.toString().
 	 */
 	public String toStringInSkipList() {
-		return "(" + this.fKey.getOrigin() + ", " + this.fKey.getDest() + ", " + this.fKey.getDate().substring(0, 5)
-				+ ", " + this.fKey.getTime() + ")";
+		StringBuilder res = new StringBuilder();
+		res.append("(");
+		res.append(this.fKey.getOrigin());
+		res.append(", ");
+		res.append(this.fKey.getDest());
+		res.append(", ");
+		res.append(this.fKey.getDate());
+		res.append(", ");
+		res.append(this.fKey.getTime());
+		res.append(")");
+		String resStr = res.toString();
+		return resStr;
 	}
 
-//	/**
-//	 * Returns the string representing the FlightNode.
-//	 */
-//	public String toStringInSkipList() {
-//		return "(" + this.fKey.getOrigin() + ", " + this.fKey.getDest() + ", " + this.fKey.getDate()
-//				+ ", " + this.fKey.getTime() + this.getData().getFlightNumber() + ", " + this.getData().getPrice() + ")";
-//	}
+	/**
+	 * Returns the string representing the FlightNode.
+	 */
+	public String toString() {
+		StringBuilder res = new StringBuilder();
+		res.append("(");
+		res.append(this.fKey.getOrigin());
+		res.append(", ");
+		res.append(this.fKey.getDest());
+		res.append(", ");
+		res.append(this.fKey.getDate());
+		res.append(", ");
+		res.append(this.fKey.getTime());
+		res.append(", ");
+		res.append(this.getData().getFlightNumber());
+		res.append(", ");
+		res.append(this.getData().getPrice());
+		res.append(")");
+		String resStr = res.toString();
+		return resStr;
+	}
 
 	public boolean equals(FlightNode other) {
 		if (this.getData().equals(other.getData()) && this.getKey().equals(other.getKey())) {
