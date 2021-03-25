@@ -355,7 +355,7 @@ public class FlightList {
 	 */
 	public void print(String filename) {
 		// FILL IN CODE
-		StringBuilder resSb = new StringBuilder();
+		StringBuilder resSb;
 		FlightNode currHead = this.head;
 		FlightNode currTail = this.tail;
 		for (int i = 0; i < this.height - 1; i++) {
@@ -363,25 +363,34 @@ public class FlightList {
 			currTail = currTail.up;
 		}
 		FlightNode curr;
+		BufferedWriter writer = null;
+		try {
+			writer = new BufferedWriter(new FileWriter(filename));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		for (int i = 0; i < this.height - 1; i++) {
+			resSb = new StringBuilder();
 			curr = currHead.next;
 			while (!curr.getKey().getOrigin().equals("ZZZ")) {
-				resSb.append(curr.toStringInSkipList());
+				resSb.append(curr.toString());
 				resSb.append(", ");
 			}
 			resSb.deleteCharAt(resSb.length() - 1);
 			resSb.deleteCharAt(resSb.length() - 1);
 			resSb.append("\n");
+			try {
+				writer.write(resSb.toString());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			currHead = currHead.down;
 		}
 		try {
-			BufferedWriter writer = new BufferedWriter(new FileWriter(filename));
-			writer.write(resSb.toString());
 			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-
 	}
 
 	/**

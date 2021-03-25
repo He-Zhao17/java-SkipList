@@ -74,12 +74,12 @@ public class FlightKey implements Comparable<FlightKey> {
 				} else if (thisDateNum < otherDateNum) {
 					return -1;
 				} else {
-					String thisTimeStr = this.time;
-					String otherTimeStr = other.time;
-					thisTimeStr = thisTimeStr.substring(0,2) + thisTimeStr.substring(3);
-					otherTimeStr = otherTimeStr.substring(0,2) + otherTimeStr.substring(3);
-					int thisTime = Integer.valueOf(thisTimeStr);
-					int otherTime = Integer.valueOf(otherTimeStr);
+					StringBuilder thisTimeStrB = new StringBuilder(this.time.substring(0,2));
+					thisTimeStrB.append(this.time.substring(3));
+					StringBuilder otherTimeStrB = new StringBuilder(other.time.substring(0,2));
+					otherTimeStrB.append(other.time.substring(3));
+					int thisTime = Integer.valueOf(thisTimeStrB.toString());
+					int otherTime = Integer.valueOf(otherTimeStrB.toString());
 					if (thisTime > otherTime) {
 						return 1;
 					} else if (thisTime < otherTime) {
@@ -99,7 +99,14 @@ public class FlightKey implements Comparable<FlightKey> {
 	 */
 	public String toString() {
 		// FILL IN CODE
-		return this.origin + " " + this.dest + " " + this.date + " " + this.time; // don't forget to change it
+		StringBuilder resStrB = new StringBuilder(this.getOrigin());
+		resStrB.append(" ");
+		resStrB.append(this.getDest());
+		resStrB.append(" ");
+		resStrB.append(this.getDate());
+		resStrB.append(" ");
+		resStrB.append(this.getTime());
+		return resStrB.toString();
 	}
 
 	/**
